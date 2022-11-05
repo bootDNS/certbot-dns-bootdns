@@ -1,0 +1,19 @@
+name: Publish on pypi
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Publish Python Package
+      uses: mariamrf/py-package-publish-action@v1.0.0
+      with:
+        python_version: '3.10.0'
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
